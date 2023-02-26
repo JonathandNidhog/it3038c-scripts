@@ -1,0 +1,7 @@
+This project is for project 1
+it is an snake program, befor run this program user need install the pygame. Here is the method about install the pygame https://www.pygame.org/wiki/GettingStarted
+follow the website install the game then run project1Snake to play the game.
+Game can be controlled by derection button or W A S D change the direction of snake move.
+Just like the usual snake game, when snake touch him self or touch the screen edge will lose the game.
+For this projcet I only have basic sanke game which can show the score, start game finished the game.
+For feature version I want to update more stuff like add voic in game.
