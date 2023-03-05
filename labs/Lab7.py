@@ -1,7 +1,7 @@
 import pygame, time
 from pygame.locals import *
 
-bgColour = pygame.Color(60,90,170)
+bgColour = pygame.Color(0,0,0)
 
 def main():
 
