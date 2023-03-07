@@ -12,7 +12,7 @@ http.createServer((req, res) => {
     });
   } else if(req.url.match("/sysinfo")) {
     myHostName=os.hostname();
-     ServerUpTime = new Date(os.uptime() * 1000).toISOString();
+     ServerUpTime = new Date(os.uptime() * 1000).toISOString().substr(11,8);
         totalMem = os.totalmem()/1048576;
         freeMem = os.freemem()/1048576;
         cpus = os.cpus().length+1;
