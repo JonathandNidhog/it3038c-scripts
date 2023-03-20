@@ -2,11 +2,11 @@ import pygame,sys,time,random
 from pygame.locals import *
 
 # define color
-ballColour = pygame.Color(0,255,0)
-bgColour = pygame.image.load('backgroundpic.png')
+ballColour = pygame.Color(255,0,0)
+bgColour = pygame.Color(0,0,0)
 snakeColour = pygame.Color(255,255,255)
 wordColour = pygame.Color(111,111,111)
-EndSurface = pygame.image.load('END.png')
+
 #gameover screen
 def gameOver(playSurface,score):
     #the font and size of game over text
@@ -22,7 +22,6 @@ def gameOver(playSurface,score):
     scoreSurf = scoreFont.render('Score:'+str(score), True, wordColour)
     scoreRect = scoreSurf.get_rect()
     scoreRect.midtop = (500, 100)
-    playSurface.blit(EndSurface,(0,0))
     playSurface.blit(scoreSurf, scoreRect)
     
     #reflesh
@@ -37,8 +36,7 @@ def main():
 
     pygame.init()
     pygame.mixer.init()#add mixer in game
-    collisionsound = pygame.mixer.Sound('Bang.wav')
-    EndSound = pygame.mixer.Sound('Ding.wav')
+    collisionsound = pygame.mixer.Sound('Ding.wav')
     fpsClock = pygame.time.Clock()
     # create pygame layer
     playSurface = pygame.display.set_mode((1000,800))
@@ -91,13 +89,9 @@ def main():
         # when snake get point
         snakeSegments.insert(0,list(snakePosition))
         if snakePosition[0] == ballPosition[0] and snakePosition[1] == ballPosition[1]:
+            collisionsound.play()
             ballSpawned = 0
             score +=1
-            if score%10 == 0 :
-                EndSound.play()
-            else:
-                collisionsound.play()
-            
         else:
             snakeSegments.pop()
         # spawn new balls
@@ -108,7 +102,7 @@ def main():
             ballSpawned = 1
             
         # creat game screen
-        playSurface.blit(bgColour,(0,0))
+        playSurface.fill(bgColour)
         for position in snakeSegments:
             pygame.draw.rect(playSurface,snakeColour,Rect(position[0],position[1],20,20))
             pygame.draw.rect(playSurface,ballColour,Rect(ballPosition[0], ballPosition[1],20,20))
@@ -125,15 +119,12 @@ def main():
         # dead
         if snakePosition[0] > 1000 or snakePosition[0] < 0:
             gameOver(playSurface,score)
-            EndSound.play()
         if snakePosition[1] > 800 or snakePosition[1] < 0:
             gameOver(playSurface,score)
-            EndSound.play()
         #if snake touch itself
         for snakeBody in snakeSegments[1:]:
             if snakePosition[0] == snakeBody[0] and snakePosition[1] == snakeBody[1]:
                 gameOver(playSurface,score)
-                EndSound.play()
         # Game speed
         fpsClock.tick(5)
 
