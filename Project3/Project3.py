@@ -106,7 +106,7 @@ def show_score_screen():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 return
-
+# Add text on screen
 def show_start_screen():
     font = pygame.font.Font(None, 36)
     text = font.render("Press any key to start", True, (255, 255, 255))
